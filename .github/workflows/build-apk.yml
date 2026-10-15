@@ -1,6 +1,10 @@
 name: Build Rehan Jamdar APK
 
 on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -18,14 +22,15 @@ jobs:
           java-version: '17'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-        with:
-          cmdline-tools-version: '11.0'
+        uses: android-actions/setup-android@v4
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
+
+      - name: Make Gradle Executable
+        run: chmod +x gradlew
 
       - name: Build APK
         run: ./gradlew assembleDebug --stacktrace
