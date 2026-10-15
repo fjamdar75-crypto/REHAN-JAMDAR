@@ -29,6 +29,9 @@ jobs:
         with:
           gradle-version: '8.7'
 
+      - name: Generate Gradle Wrapper
+        run: gradle wrapper
+
       - name: Make Gradle Executable
         run: chmod +x gradlew
 
